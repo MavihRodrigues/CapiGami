@@ -11,8 +11,13 @@ class Index extends Component
     public $nome;
     public $email;
     public $rm;
-    public $senha;
+    public $password;
     public $confirmar_senha;
+
+    protected $listeners = [
+        'editarUser',
+        'userAtualizado' => 'render'
+    ];
 
     public function render()
     {
@@ -27,7 +32,7 @@ class Index extends Component
             $this->nome = $aluno->nome;
             $this->email = $aluno->email;
             $this->rm = $aluno->rm;
-            $this->senha = $aluno->senha;
+            $this->password = $aluno->senha;
             $this->confirmar_senha = $aluno->confirmar_senha;
         
         }

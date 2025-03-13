@@ -13,39 +13,50 @@
         <h3 class="card-title mt-5 text-center"><strong>Crie Sua Conta!</strong></h3>
 
         <div class="card-body mx-4">
-            <form wire:submit.prevent="store">
+            <form class="row" wire:submit.prevent="store">
                 <div class="mt-1 mb-3 ">
                     <label for="nome" class="form-label">Nome</label> {{-- placeholder: colocar um texto de exemplo
                     dentro de uma caixa de texto --}}
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex.: Aluno"
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex.: Administrador(a)"
                         wire:model.defer="nome">
+                        @error('nome') <span class="text-warning small">{{ $message }}</span>@enderror
                 </div>
                 <div class="mb-3 ml-2">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control"
-                        placeholder="Ex.: aluno@portalsesisp.org.br" wire:model.defer="email">
+                        placeholder="Ex.: administrador@portalsesisp.org.br" wire:model.defer="email">
+                        @error('email') <span class="text-warning small">{{ $message }}</span>@enderror
                 </div>
+                
+                    <div class="col-md-6 ">
+                        <label for="nif">NIF</label>
+                        <input name="text" id="nif" class="form-control" placeholder="Ex: 2345"
+                            wire:model.defer="nif">
+                            @error('nif') <span class="text-warning small">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="col-md-6 ">
+                        <label for="telefone">Telefone</label>
+                        <input name="text" id="telefone" class="form-control" placeholder="Ex: (99)9999-9999"
+                            wire:model.defer="telefone">
+                            @error('telefone') <span class="text-warning small">{{ $message }}</span>@enderror
+                    </div>
+                
+
 
                 <div class="mb-3">
-                    <label for="rm">RM</label>
-                    <input name="text" id="rm" class="form-control" rows="5" placeholder="Ex.: 1234"
-                        wire:model.defer="rm"></input>
-                </div>
-
-                <div class="mb-3">
-                    <label for="senha" class="form-label">Senha</label>
+                    <label for="password" class="form-label">Senha</label>
                     <div class="input-group ">
-                        <input type="password" name="password" id="senhaPassword" class="form-control" rows="5"
-                            wire:model.defer="senha"></input>
+                        <input type="password" name="password" id="password" class="form-control" rows="5"
+                            wire:model.defer="password"></input>
                         <button class="btn btn-light" type="button"><i class="bi bi-eye-fill"></i></button>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="confirmar_senha" class="form-label">Confirmar Senha</label>
+                    <label for="confirm_password" class="form-label">Confirmar Senha</label>
                     <div class="input-group">
-                    <input type="password" name="password" id="confirmar_senhaPassword" class="form-control" rows="5"
-                        wire:model.defer="confirmar_senha"></input>
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" rows="5"
+                        wire:model.defer="confirm_password"></input>
                         <button class="btn btn-light" type="button"><i class="bi bi-eye-fill"></i></button>
                     </div>
                 </div>
