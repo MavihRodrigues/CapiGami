@@ -36,7 +36,7 @@
                     <label for="senha" class="form-label">Senha</label>
                     <div class="input-group ">
                         <input type="password" name="password" id="senhaPassword" class="form-control" rows="5"
-                            wire:model.defer="senha"></input>
+                            wire:model.defer="password"></input>
                         <button class="btn btn-light" type="button"><i class="bi bi-eye-fill"></i></button>
                     </div>
                 </div>

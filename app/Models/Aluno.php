@@ -10,10 +10,11 @@ class Aluno extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome',
-        'email',
         'rm',
-        'senha',
-        'confirmar_senha'
+        'user_id'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

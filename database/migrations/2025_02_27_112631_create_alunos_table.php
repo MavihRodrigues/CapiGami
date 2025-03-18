@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 80)->nullable(false);
-            $table->string('email', 80)->nullable(false)->unique(true);
             $table->string('rm', 4)->nullable(false)->unique(true);
-            $table->string('senha', 12)->nullable(false);
-            $table->string('confirmar_senha', 12)->nullable(false);
+            $table->bigInteger('user_id')->unsigned()->nullable(false);
+            $table->foreign('user_id')->references('id')->on('users'); 
             $table->timestamps();
         });
     }

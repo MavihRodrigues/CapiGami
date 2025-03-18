@@ -3,6 +3,8 @@
 namespace App\Livewire\Aluno;
 
 use App\Models\Aluno;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class Create extends Component
@@ -10,8 +12,7 @@ class Create extends Component
     public $nome;
     public $email;
     public $rm;
-    public $senha;
-    public $confirmar_senha;
+    public $password;
 
     public function render()
     {
@@ -19,15 +20,19 @@ class Create extends Component
     }
 
     public function store(){
+      $user = User::create([
+            'name' => $this->nome, 
+            'email' => $this->email, 
+            'password' => Hash::make($this->password),
+            'role' => 'aluno'
+        ]); 
+
         Aluno::create([
-            'nome'=>$this->nome,
-            'email'=>$this->email,
             'rm'=>$this->rm,
-            'senha'=>$this->senha,
-            'confirmar_senha'=>$this->confirmar_senha,
+            'user_id' => $user->id
         ]);
 
-        session()->flash('success', 'Cadastro Realizado');
+        session()->flash('success', 'Cadastro Realizado, espere aprovação para entrar');
     }
 
 }

@@ -3,60 +3,49 @@
 namespace App\Livewire\Aluno;
 
 use App\Models\Aluno;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Edit extends Component
 {
-
-    public $alunoId;
+    public $alunoId2;
     public $nome;
     public $email;
-    public $rm;
+    public $password;
 
-    protected $listeners =
-    [
-        'editarAluno',
-        'closeEditModal' => 'fecharModal'
-    ];
-
-    public function fecharModal(){
-        $this->dispatch('hideModal');
-    }
-    public function render()
-    {
-        return view('livewire.aluno.edit');
-    }
-    
-    public function editarAluno($alunoId)
-    {
-        $aluno = Aluno::find($alunoId);
-
-        if ($aluno) {
-            $this->alunoId = $aluno->id;
+    public function mount(){
+        
+        if($aluno = Aluno::find(Auth::user()->id)){
+            $this->alunoId2 = $aluno->id;
             $this->nome = $aluno->nome;
             $this->email = $aluno->email;
-            $this->rm = $aluno->rm;
-
-            $this->dispatch('openEditModal');
-        }
+             $this->password = $aluno->senha;
+        }    
+        //fazer uma verificação: verificar se o usuário existe
+        
     }
 
     public function salvar()
     {
-        $aluno = Aluno::find($this->alunoId);
+        $aluno = Aluno::find($this->alunoId2);
 
         if ($aluno) {
             $aluno->update([
                 'nome' => $this->nome,
                 'email' => $this->email,
-                'rm' => $this->rm
+                'password' => $this->password
             ]);
 
-            $this->dispatch('AlunoAtualizado');
-            $this->dispatch('fecharModalEdicao');
-            session()->flash('message', 'Aluno Atualizado');
+            $aluno->save();
+            session()->flash('success', 'Dados Atualizados');
         }
     }
 
+
+    
+    public function render()
+    {
+        return view('livewire.aluno.edit');
+    }
     
 }

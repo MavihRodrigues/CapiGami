@@ -1,61 +1,42 @@
-<div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"
-    wire:Listener="hideModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Editar Tarefa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Nome</label>
-                    <input type="text" class="form-control"
-                    wire:model="nome">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="text"
-                    class="form-control"
-                    wire:model="email">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Rm</label>
-                    <input type="text"
-                    class="form-control"
-                    wire:model="rm">
-                </div>
-              
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-                >Cancelar</button>
-                <button type="button"
-                class="btn btn-primary"
-                wire:click="salvar">Salvar</button>
-            </div>
-        </div>
+<div class="mt-5  ">
+
+    @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{session('success')}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            Livewire.on('fecharModalEdicao', function(){
-                var modal = document.getElementById('editModal');
-                var modalInstance = bootstrap.Modal.getInstance(modal);
 
-                if(modalInstance){
-                    modalInstance.hide();
-                } else {
-                    var newModal = new bootstrap.modal(modal);
-                    newModal.hide();
-                }
+    @endif
 
-                document.querySelectorAll('.modal-backdrop')
-                .forEach(el => el.remove());
-                document.body.classList.remove('modal-open');
-            });
-        });
-    </script>
-    
+    <h3 class="title text-light mt-5 text-center"><strong>Editar</strong></h3>
+
+    <div>
+        <form wire:submit.prevent="salvar">
+            <div class="mt-1 mb-3 ">
+                <label for="nome" class="form-label">Nome</label> {{-- placeholder: colocar um texto de exemplo
+                dentro de uma caixa de texto --}}
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex.: Maria"
+                    wire:model.defer="nome">
+            </div>
+            <div class="mb-3 ml-2">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control"
+                    placeholder="Ex.: aluno@portalsesisp.org.br" wire:model.defer="email">
+            </div>
+
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <div class="input-group ">
+                    <input type="password" name="password" id="senhaPassword" class="form-control" rows="5"
+                        wire:model.defer="senha"></input>
+                    <button class="btn btn-light" type="button"><i class="bi bi-eye-fill"></i></button>
+                </div>
+            </div>
+
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn text-light col-md-11" style="background-color: #D9931C">
+                    <strong>Salvar</strong></button>
+        </form>
+    </div>
+
 </div>

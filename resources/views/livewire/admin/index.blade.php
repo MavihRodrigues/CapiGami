@@ -20,12 +20,10 @@
                             <td>{{ $t->rm }}</td>
                             <td>{{$t->Ações}}
                             
-                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" 
-                                    data-bs-target="#viewModal"
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal"
                                     wire:click="abrirModalVisualizar({{ $t->id }})"><strong>Vizualizar</strong></button>
-
                                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editModal"
+                                    data-bs-target="#editModal" 
                                     wire:click="abrirModalEdicao({{ $t->id }})"><strong>Editar</strong></button>
 
                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -36,6 +34,8 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <livewire:aluno.edit>
 
             <!-- Modal de Exclusão -->
             <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"

@@ -57,4 +57,8 @@ class User extends Authenticatable
     public function isTeacher(){
         return $this->role === self::ROLE_TEACHER;
     }
+
+    public function aluno(){
+        return $this->hasOne(Aluno::class);  
+    }
 }
