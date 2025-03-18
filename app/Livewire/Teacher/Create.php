@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Livewire\Professor;
+namespace App\Livewire\Teacher;
 
-use App\Models\Professor;
+use App\Models\teacher;
+use App\Models\Teacher as ModelsTeacher;
 use Livewire\Component;
 
 class Create extends Component
@@ -41,15 +42,16 @@ class Create extends Component
         'cconfirm_password.min' => 'O limite minímo de caracteres foi atingido',
     ];
 
+
     public function render()
     {
-        return view('livewire.professor.create');
+        return view('livewire.teacher.create');
     }
 
     public function store(){
 
         $this->validate();
-        Professor::create([
+        teacher::create([
             'nome'=>$this->nome,
             'email'=>$this->email,
             'nif'=>$this->nif,
@@ -60,5 +62,4 @@ class Create extends Component
 
         session()->flash('success', 'Cadastro Realizado');
     }
-
 }

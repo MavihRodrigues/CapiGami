@@ -1,17 +1,18 @@
 <?php
 
 use App\Livewire\Admin\Create as AdminCreate;
-use App\Livewire\Aluno\Create;
+use App\Livewire\Aluno\Create as AlunoCreate;
 use App\Livewire\Aluno\Index;
 use App\Livewire\Auth\Login;
-use App\Models\Professor;
+use App\Livewire\Teacher\Create as TeacherCreate;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/aluno/create', Create::class);
+Route::get('/aluno/create', AlunoCreate::class);
 
 Route::get('/admin/create', AdminCreate::class);
 
-Route::get('/create/teacher', Professor::class);
+Route::get('/teacher/create', TeacherCreate::class);
 
 Route::get('/aluno', function(){
     return 'login aluno';
@@ -26,3 +27,5 @@ Route::get('/teacher', function(){
 })->middleware('auth', 'role:teacher')->name('teacher.dashboard');
 
 Route::get('/login', Login::class)->name('login');
+
+Route::get('index/aluno', Index::class);
